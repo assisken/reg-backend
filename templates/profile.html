@@ -1,0 +1,17 @@
+{% include 'base.html' %}
+
+{% block content %}
+<div class="hor-center">
+    {% if debug %}
+        <div class="debug">{{ debug }}</div>
+    {% endif %}
+    {% if info %}
+        <div class="debug">{{ info }}</div>
+    {% endif %}
+    <div class="btn btn-light btn-block text-dark">
+      <img class="rounded-circle" src="https://confid.ru/data/avatars/{{ profile.avatar }}">
+      <h2>{{ profile.surname }} {{ profile.name }} {{ profile.midname }}</h2>
+      <h3>{{ profile.email }}</h3>
+    </div>
+</div>
+{% endblock %}

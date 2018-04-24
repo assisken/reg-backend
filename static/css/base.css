@@ -1,0 +1,56 @@
+body {
+    background-color: #006ddb;
+}
+
+.info {
+    background-color: #fff;
+    padding: 8px 15px;
+    margin: 0 auto 20px;
+    border-radius: .25rem;
+}
+
+.logo {
+    margin-top: 25px;
+    height: auto;
+    width: 50vw;
+}
+
+.hor-center {
+  width: 50vw;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.vert-center {
+    margin: 25vh auto 0;
+}
+
+.form-signin {
+    padding: 15px;
+}
+
+
+.form-signin div:first-child {
+    margin-bottom: -1px;
+    border-radius: 0;
+}
+
+input.first {
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    margin-bottom: -1px;
+    margin-top: auto;
+}
+
+input.last {
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+    margin-bottom: 1rem;
+    margin-top: -1px;
+}
+
+.form-control:not(.first):not(.last) {
+    border-radius: 0;
+    margin-top: -1px;
+    margin-bottom: -1px;
+}

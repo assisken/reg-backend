@@ -1,0 +1,25 @@
+{% include 'base.html' %}
+
+{% block content %}
+<img class="logo mb-4 mx-auto d-block" src="/static/img/logo_smiap.png" alt="smiap logo" >
+<div class="hor-center">
+    {% if info %}
+        <div class="alert alert-warning">{{ info }}</div>
+    {% endif %}
+    {% if error %}
+        <div class="alert alert-danger">{{ error }}</div>
+    {% endif %}
+    {% if success %}
+        <div class="alert alert-success">{{ success }}</div>
+    {% endif %}
+    <a class="btn btn-light btn-block text-dark" href="{% url 'main:login' %}">Войти</a>
+    <a class="btn btn-light btn-block text-dark" target="_blank" href="https://confid.ru/registration">Зарегистрироваться</a>
+{#    <h2 class="info h5 mb-3 font-weight-bold text-center text-dark bg-light">Регистрация студента</h2>#}
+{#    <form class="hor-center" action="/" method="post">#}
+{#        <input class="first form-control" type="text" name="username" placeholder="Логин" required autofocus>#}
+{#        <input class="form-control" type="password" name="pass" placeholder="Пароль" required>#}
+{#        <input class="last form-control" type="password" name="pass_confirm" placeholder="Подтвердите пароль" required>#}
+{#        <button class="btn btn-light btn-block text-dark" type="submit">Зарегистрироваться</button>#}
+{#    </form>#}
+</div>
+{% endblock %}
