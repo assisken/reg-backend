@@ -1,17 +1,18 @@
 {% include 'base.html' %}
+{% include 'navigation.html' %}
 
 {% block content %}
-<div class="hor-center">
+<main class="hor-center page-width">
     {% if debug %}
         <div class="debug">{{ debug }}</div>
     {% endif %}
     {% if info %}
         <div class="debug">{{ info }}</div>
     {% endif %}
-    <div class="btn btn-light btn-block text-dark">
+    <div class="text-dark bg-light text-center">
       <img class="rounded-circle" src="https://confid.ru/data/avatars/{{ student.picture }}">
       <h2>{{ student.family_name }} {{ student.given_name }} {{ student.middle_name }}</h2>
       <h3>{{ student.email }}</h3>
     </div>
-</div>
+</main>
 {% endblock %}

@@ -1,14 +1,13 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
+from main.models import Student
 
 
 def profile(request):
-    # TODO: make session
-    prof = {
-        'surname': '',
-        'name': '',
-        'midname': '',
-        'email': '',
-        'avatar': ''
-    }
+    try:
+        id = request.session['user-id']
+    except KeyError:
+        return redirect('main:login')
+    else:
+        student = Student.objects.get(pk=id)
 
-    return render(request, 'profile.html', {'profile': prof})
+    return render(request, 'profile.html', {'student': student})

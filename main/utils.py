@@ -25,7 +25,10 @@ def fetch_token(code):
                 client_secret=client_secret,
                 code=code)
     r = requests.post(url, headers=headers, data=data)
-    token = r.json()['access_token']
+    try:
+        token = r.json()['access_token']
+    except KeyError:
+        token = r.json()
     return token
 
 

@@ -15,10 +15,12 @@ body {
     width: 50vw;
 }
 
+.page-width {
+    max-width: 1200px;
+}
+
 .hor-center {
-  width: 50vw;
-  max-width: 600px;
-  margin: 0 auto;
+    margin: 0 auto;
 }
 
 .vert-center {
@@ -53,4 +55,40 @@ input.last {
     border-radius: 0;
     margin-top: -1px;
     margin-bottom: -1px;
+}
+
+.navbar {
+    max-height: 40px;
+}
+
+main {
+    padding-top: 40px;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    z-index: 1;
+}
+
+.dropdown-content a {
+    display: block;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown-text {
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: default;
+    width: 170px;
+    float: left;
+    text-align: center;
+}
+
+.dropdown, .dropdown-content {
+    min-width: 200px;
 }
