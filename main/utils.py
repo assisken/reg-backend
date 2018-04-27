@@ -1,4 +1,4 @@
-from .models import Student
+from .models import User
 import urllib.parse as up
 import requests
 
@@ -45,9 +45,9 @@ def fetch_user(token):
 
 def lazy_add_user(user):
     try:
-        student = Student.objects.get(sub=int(user['sub']))
-    except Student.DoesNotExist:
-        student = Student.objects.create(
+        student = User.objects.get(sub=int(user['sub']))
+    except User.DoesNotExist:
+        student = User.objects.create(
             name=user['name'],
             family_name=user['family_name'],
             given_name=user['given_name'],

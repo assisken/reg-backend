@@ -6,12 +6,12 @@
         <ul class="navbar-nav mr-auto">
             <li class="nav-item"><a class="nav-link" href="{% url 'main:index' %}">Главная</a></li>
         </ul>
-        {% if student %}
+        {% if user %}
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <div class="dropdown">
                         <div class="nav-link dropdown-toggle bg-dark">
-                            <div class="dropdown-text">{{ student.family_name }} {{ student.given_name }}</div>
+                            <div class="dropdown-text">{{ user.family_name }} {{ user.given_name }}</div>
                         </div>
                         <div class="dropdown-content">
                             <a class="nav-link bg-dark" href="{% url 'main:profile' %}">Профиль</a>

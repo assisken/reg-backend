@@ -1,19 +1,19 @@
 from django.shortcuts import render, redirect
 from django.http import Http404
 
-from main.models import Student
+from main.models import User
 
 
 def index(request):
     if request.method == 'GET':
         try:
             pk = request.session['user-id']
-            stud = Student.objects.get(pk=pk)
-        except (KeyError, Student.DoesNotExist):
-            stud = None
+            user = User.objects.get(pk=pk)
+        except (KeyError, User.DoesNotExist):
+            user = None
         else:
-            return render(request, 'profile.html', {'student': stud})
+            return render(request, 'profile.html', {'user': user})
 
-        return render(request, 'index.html', {'student': stud})
+        return render(request, 'index.html', {'user': user})
     else:
         raise Http404

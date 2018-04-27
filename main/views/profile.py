@@ -1,5 +1,5 @@
 from django.shortcuts import redirect, render
-from main.models import Student
+from main.models import User
 
 
 def profile(request):
@@ -8,6 +8,6 @@ def profile(request):
     except KeyError:
         return redirect('main:login')
     else:
-        student = Student.objects.get(pk=id)
+        user = User.objects.get(pk=id)
 
-    return render(request, 'profile.html', {'student': student})
+    return render(request, 'profile.html', {'user': user})

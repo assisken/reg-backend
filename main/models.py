@@ -1,12 +1,10 @@
 from django.db import models
 
 
-# class Session(models.Model):
-#     user_id = models.IntegerField(unique=True)
-#     session_id = models.
+class User(models.Model):
+    LOCALES = (('ru-RU', 'Российская'),
+               ('en-US', 'English'))
 
-
-class Student(models.Model):
     # Есть в коде
     email = models.CharField(max_length=30)
     email_verified = models.BooleanField(default=False)
@@ -15,7 +13,6 @@ class Student(models.Model):
     middle_name = models.CharField(max_length=255, default=None)
     picture = models.CharField(max_length=40, default=None, null=True)
     birthdate = models.DateField()
-    LOCALES = (('ru-RU', 'Российская'), ('en-US', 'English'))
     locale = models.CharField(choices=LOCALES, max_length=5)
 
     # Нет в коде, но есть в API
@@ -30,6 +27,7 @@ class Student(models.Model):
     updated_at = models.DateTimeField(null=True, blank=True)
 
     # Кастомные поля
+    linux_user = models.CharField(max_length=20, null=True, blank=True)
 
     def __str__(self):
         return '[{sub}] {name} {family} {middle} ({pref})' \

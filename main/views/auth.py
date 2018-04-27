@@ -20,4 +20,5 @@ def auth(request):
 
     request.session['user-id'] = stud.id
     request.session.set_expiry(0)
+
     return redirect('main:profile')
