@@ -1,0 +1,26 @@
+{% include 'base.html' %}
+
+{% block content %}
+    <img class="logo mb-4 mx-auto d-block" src="/static/img/logo_smiap.png" alt="smiap logo" >
+    <div class="hor-center form bg-light">
+        {% if info %}
+            <div class="alert alert-warning">{{ info }}</div>
+        {% endif %}
+        {% if error %}
+            <div class="alert alert-danger">{{ error }}</div>
+        {% endif %}
+        {% if success %}
+            <div class="alert alert-success">{{ success }}</div>
+        {% endif %}
+        <form action="{% url 'main:make_home' %}" method="post">
+            {% csrf_token %}
+            {% for f in form %}
+                <div class="form-group">
+                    {{ f.label }}
+                    {{ f }}
+                </div>
+            {% endfor %}
+            <input type="submit" value="Зарегаца" class="btn btn-primary"/>
+        </form>
+    </div>
+{% endblock %}

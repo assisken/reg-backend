@@ -62,7 +62,15 @@ input.last {
 }
 
 main {
-    padding-top: 40px;
+    background-color: white;
+    padding: 40px 10px 10px;
+}
+
+.form {
+    padding: 10px;
+    width: 500px;
+    margin: 0 auto;
+    border-radius: .3rem;
 }
 
 .dropdown-content {

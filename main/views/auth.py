@@ -15,10 +15,14 @@ def auth(request):
     if not isinstance(token, str):
         return HttpResponse(str(token))
 
-    user = utils.fetch_user(token)
-    stud = utils.lazy_add_user(user)
+    usr = utils.fetch_user(token)
+    user = utils.lazy_add_user(usr)
 
-    request.session['user-id'] = stud.id
+    request.session['user-id'] = user.id
     request.session.set_expiry(0)
 
-    return redirect('main:profile')
+    if user.linux_user:
+        return redirect('main:profile')
+    else:
+        return redirect('main:make_home')
+

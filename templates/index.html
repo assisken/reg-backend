@@ -12,16 +12,11 @@
     {% if success %}
         <div class="alert alert-success">{{ success }}</div>
     {% endif %}
-    <div class="btn-group hor-center">
-        <a class="btn btn-secondary btn-light text-dark" href="{% url 'main:login' %}">Войти</a>
-        <a class="btn btn-secondary btn-light text-dark" target="_blank" href="https://confid.ru/registration">Зарегистрироваться</a>
+    <div class="form">
+        <div class="btn-group row" style="margin-left: auto;">
+            <a class="btn btn-primary btn-light text-dark" href="{% url 'main:login' %}">Войти</a>
+            <a class="btn btn-primary btn-light text-dark" target="_blank" href="https://confid.ru/registration">Зарегистрироваться</a>
+        </div>
     </div>
-{#    <h2 class="info h5 mb-3 font-weight-bold text-center text-dark bg-light">Регистрация студента</h2>#}
-{#    <form class="hor-center" action="/" method="post">#}
-{#        <input class="first form-control" type="text" name="username" placeholder="Логин" required autofocus>#}
-{#        <input class="form-control" type="password" name="pass" placeholder="Пароль" required>#}
-{#        <input class="last form-control" type="password" name="pass_confirm" placeholder="Подтвердите пароль" required>#}
-{#        <button class="btn btn-light btn-block text-dark" type="submit">Зарегистрироваться</button>#}
-{#    </form>#}
 </div>
 {% endblock %}
