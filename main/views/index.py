@@ -2,7 +2,6 @@ from django.shortcuts import render, redirect
 from django.http import Http404
 
 from main.models import User
-from main.forms import LinuxUser
 
 
 def index(request):

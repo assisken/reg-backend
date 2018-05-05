@@ -6,7 +6,7 @@ import main.utils as utils
 def auth(request):
     state = request.GET.get('state')
     if state != 'none':
-        return render(request, 'index.html', {'info': 'Что-то пошло не так, повторите попытку...'})
+        return redirect('main:login')
 
     code = request.GET.get('code')
 

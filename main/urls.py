@@ -7,5 +7,5 @@ urlpatterns = [
     path('profile/', profile.profile, name='profile'),
     path('conf/', make_home.make_home, name='make_home'),
     path('logout/', logout.logout, name='logout'),
-    path('oidc_callback', auth.auth)
+    path('oidc_callback', auth.auth, name='auth')
 ]

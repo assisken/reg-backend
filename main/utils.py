@@ -10,7 +10,7 @@ def fetch_token(code):
     client_id = 'students'
     client_secret = 'StarchausMudak'
     grant_type = 'authorization_code'
-    redirect_uri = up.quote('https://client.example.org/cb', safe='')
+    redirect_uri = up.quote('http://reg.mati.su/oidc_callback', safe='')
     url = 'https://confid.ru/openid-connect/token'
     auth_header = 'Basic {client_id}:{client_secret}'.format(client_id=client_id, client_secret=client_secret)
 
