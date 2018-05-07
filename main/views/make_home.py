@@ -11,7 +11,6 @@ def make_home(request):
     user_id = request.session['user-id']
     user = User.objects.get(pk=user_id)
 
-    # If user has linux dir -> redirect
     if user.linux_user:
         return redirect('main:profile')
 
@@ -44,10 +43,10 @@ def make_home(request):
     if error:
         return render(request, 'make_home.html', {'form': form, 'error': error})
 
-    user_filter = User.objects.filter(pk=user_id)
-    user_filter.update(linux_user=linux_name)
-
     if CREATE_HOME:
         create_home(linux_name, pwd)
+
+    user_filter = User.objects.filter(pk=user_id)
+    user_filter.update(linux_user=linux_name)
 
     return redirect('main:profile')
