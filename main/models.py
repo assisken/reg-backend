@@ -11,7 +11,7 @@ class User(models.Model):
     family_name = models.CharField(max_length=255, default=None)
     given_name = models.CharField(max_length=255, default=None)
     middle_name = models.CharField(max_length=255, default=None)
-    picture = models.CharField(max_length=40, default=None, null=True)
+    picture = models.CharField(max_length=40, default=None, null=True, blank=True)
     birthdate = models.DateField()
     locale = models.CharField(choices=LOCALES, max_length=5)
 
@@ -36,3 +36,17 @@ class User(models.Model):
                     family=self.family_name,
                     middle=self.middle_name,
                     pref=self.preferred_username)
+
+    def get_avatar(self):
+        if self.picture:
+            return self.picture
+        else:
+            return 'default.png'
+
+    def get_profile(self):
+        return {
+            'ФИО': '{} {} {}'.format(self.family_name, self.given_name, self.middle_name),
+            'Дата рождения': self.birthdate.strftime('%d.%m.%Y'),
+            'E-mail': self.email,
+            'Домен': '{name}.mati.su'.format(name=self.linux_user)
+        }

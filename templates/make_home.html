@@ -3,16 +3,8 @@
 {% block content %}
     <img class="logo mb-4 mx-auto d-block" src="/static/img/logo_smiap.png" alt="smiap logo" >
     <div class="hor-center form bg-light">
-        {% if info %}
-            <div class="alert alert-warning">{{ info }}</div>
-        {% endif %}
-        {% if error %}
-            <div class="alert alert-danger">{{ error }}</div>
-        {% endif %}
-        {% if success %}
-            <div class="alert alert-success">{{ success }}</div>
-        {% endif %}
-        <form action="{% url 'main:make_home' %}" method="post">
+        {% include 'notifications.html' %}
+        <form action="{% url 'main:profile' %}" method="post">
             {% csrf_token %}
             {% for f in form %}
                 <div class="form-group">

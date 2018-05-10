@@ -1,0 +1,37 @@
+{% extends 'profile.html' %}
+
+{% block profile_content %}
+    <h4>Инструкция</h4>
+    <hr>
+    <p>
+    Спасибо, что пользуетесь нашим приложением для своего сайта.<br>
+    Ваш сайт доступен по адресу
+    <a href="http://{{ user.linux_user }}.mati.su" target="_blank">{{ user.linux_user }}.mati.su</a>.<br>
+    </p>
+    <p>
+    Пока на нём пусто, потому что он не настроен. Чтобы настроить его, следуйте следующей инструкции,
+    соответствующей вашей операционной системе:
+    </p>
+    <h5>Windows</h5>
+    <hr>
+    <ol>
+        <li>Откройте проводник.</li>
+        <li>В адресной строке введите следующий адрес:<br><code>ftp://{{ user.linux_user }}.mati.su</code></li>
+        <li>Создайте папку <code>www</code></li>
+        <li>Перейдите в эту папку</li>
+        <li>Создайте папку <code>{{ user.linux_user }}.mati.su</code></li>
+        <li>Перейдите в эту папку</li>
+        <li>Вставляете файлы сайта</li>
+    </ol>
+    <p>После вышеуказанных действий сайт должен быть доступен.</p>
+    <h5>Mac OS, Linux</h5>
+    <hr>
+    <div class="list-group list-group-item">
+<pre><code>ssh {{ user.linux_user }}@mati.su
+mkdir -p www/{{ user.linux_user }}.mati.su
+cd www/{{ user.linux_user }}.mati.su
+scp -r <i>путь_к_сайту</i> ssh://{{ user.linux_user }}@mati.su:/home/{{ user.linux_user }}/www/{{ user.linux_user }}.mati.su
+</code></pre>
+    </div>
+    <code></code>
+{% endblock %}

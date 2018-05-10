@@ -1,13 +1,30 @@
 from django.shortcuts import redirect, render
+
+from main.views.make_home import make_home
 from main.models import User
 
 
-def profile(request):
+def info(request):
     try:
-        id = request.session['user-id']
-    except KeyError:
+        user_id = request.session['user-id']
+        user = User.objects.get(pk=user_id)
+    except (KeyError, User.DoesNotExist):
         return redirect('main:login')
-    else:
-        user = User.objects.get(pk=id)
 
-    return render(request, 'profile.html', {'user': user})
+    if not user.linux_user:
+        return make_home(request, user)
+
+    return render(request, 'profile_content/info.html', {'user': user})
+
+
+def instruction(request):
+    try:
+        user_id = request.session['user-id']
+        user = User.objects.get(pk=user_id)
+    except (KeyError, User.DoesNotExist):
+        return redirect('main:login')
+
+    if not user.linux_user:
+        return make_home(request, user)
+
+    return render(request, 'profile_content/instruction.html', {'user': user})

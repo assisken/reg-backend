@@ -1,0 +1,12 @@
+{% extends 'profile.html' %}
+
+{% block profile_content %}
+    <h4>О себе</h4>
+    <hr>
+    {% for key, value in user.get_profile.items %}
+        <dl class="line">
+            <dt class="key">{{ key }}:</dt>
+            <dd class="value">{{ value }}</dd>
+        </dl>
+    {% endfor %}
+{% endblock %}

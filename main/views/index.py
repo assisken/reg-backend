@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import Http404
 
+from stauth.settings import DEBUG
 from main.models import User
 
 
@@ -10,12 +11,9 @@ def index(request):
             pk = request.session['user-id']
             user = User.objects.get(pk=pk)
         except (KeyError, User.DoesNotExist):
-            return render(request, 'index.html')
+            return render(request, 'index.html', {'debug': DEBUG})
 
-        if user.linux_user:
-            return render(request, 'profile.html', {'user': user})
-        else:
-            return redirect('main:make_home')
+        return redirect('main:instruction')
 
     else:
         raise Http404

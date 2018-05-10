@@ -1,16 +1,12 @@
 from django.shortcuts import redirect, render, HttpResponse, Http404
-from django.forms import ValidationError
 from stauth.settings import CREATE_HOME
 
 from main.utils import allowed_username, create_home, home_exists, username_exists
-from main.forms import LinuxUser
 from main.models import User
+from main.forms import LinuxUser
 
 
-def make_home(request):
-    user_id = request.session['user-id']
-    user = User.objects.get(pk=user_id)
-
+def make_home(request, user):
     if user.linux_user:
         return redirect('main:profile')
 
@@ -46,7 +42,7 @@ def make_home(request):
     if CREATE_HOME:
         create_home(linux_name, pwd)
 
-    user_filter = User.objects.filter(pk=user_id)
+    user_filter = User.objects.filter(pk=user.id)
     user_filter.update(linux_user=linux_name)
 
-    return redirect('main:profile')
+    return render(request, 'profile.html', {'user': user, 'success': 'Ваша учётная запись успешно создана.'})

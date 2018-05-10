@@ -3,15 +3,6 @@
 {% block content %}
 <img class="logo mb-4 mx-auto d-block" src="/static/img/logo_smiap.png" alt="smiap logo" >
 <div class="hor-center page-width">
-    {% if info %}
-        <div class="alert alert-warning">{{ info }}</div>
-    {% endif %}
-    {% if error %}
-        <div class="alert alert-danger">{{ error }}</div>
-    {% endif %}
-    {% if success %}
-        <div class="alert alert-success">{{ success }}</div>
-    {% endif %}
     <div class="form">
         <div class="btn-group row" style="margin-left: auto;">
             <a class="btn btn-primary btn-light text-dark" href="{% url 'main:login' %}">Войти</a>
