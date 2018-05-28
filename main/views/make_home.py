@@ -45,4 +45,4 @@ def make_home(request, user):
     user_filter = User.objects.filter(pk=user.id)
     user_filter.update(linux_user=linux_name)
 
-    return render(request, 'profile.html', {'user': user, 'success': 'Ваша учётная запись успешно создана.'})
+    return redirect('main:instruction')
