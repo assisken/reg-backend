@@ -7,6 +7,8 @@ from main.forms import LinuxUser
 
 
 def make_home(request, user):
+
+
     if user.linux_user:
         return redirect('main:profile')
 

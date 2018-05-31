@@ -1,5 +1,6 @@
 from django.shortcuts import redirect, render
 
+from stauth.settings import DEBUG
 from main.views.make_home import make_home
 from main.models import User
 
@@ -14,7 +15,7 @@ def info(request):
     if not user.linux_user:
         return make_home(request, user)
 
-    return render(request, 'profile_content/info.html', {'user': user})
+    return render(request, 'profile_content/info.html', {'user': user, 'debug': DEBUG})
 
 
 def instruction(request):
@@ -27,4 +28,4 @@ def instruction(request):
     if not user.linux_user:
         return make_home(request, user)
 
-    return render(request, 'profile_content/instruction.html', {'user': user})
+    return render(request, 'profile_content/instruction.html', {'user': user, 'debug': DEBUG})

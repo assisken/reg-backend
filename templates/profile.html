@@ -1,24 +1,24 @@
-{% include 'base.html' %}
-{% include 'navigation.html' %}
+{% extends 'base.html' %}
 
 {% load active %}
 
 {% block content %}
-<main class="hor-center page-width bg-light">
-    {% include 'notifications.html' %}
+    {% include 'navigation.html' %}
+    <main class="hor-center page-width bg-light">
+        {% include 'notifications.html' %}
 
-    <div class="profile row no-gutters text-dark">
-        <div class="col-md-2 text-center">
-            <img class="rounded-circle img-thumbnail" src="https://confid.ru/data/avatars/{{ user.get_avatar }}">
-            <div class="list-group">
-                <a href="{% url 'main:profile' %}" class="list-group-item {% active 'main:profile' %}">О себе</a>
-                <a href="{% url 'main:instruction' %}" class="list-group-item {% active 'main:instruction' %}">Инструкция</a>
+        <div class="profile row no-gutters text-dark">
+            <div class="col-md-2 text-center">
+                <img class="rounded-circle img-thumbnail" src="https://confid.ru/data/avatars/{{ user.get_avatar }}">
+                <div class="list-group">
+                    <a href="{% url 'main:profile' %}" class="list-group-item {% active 'main:profile' %}">О себе</a>
+                    <a href="{% url 'main:instruction' %}" class="list-group-item {% active 'main:instruction' %}">Инструкция</a>
+                </div>
             </div>
-        </div>
-        <div class="profile-content col-md-10">
-            {% block profile_content %}
-            {% endblock %}
-        </div>
-    </div>
-</main>
+            <div class="profile-content col-md-10">
+                {% block profile_content %}
+                {% endblock %}
+            </div>
+            </div>
+    </main>
 {% endblock %}

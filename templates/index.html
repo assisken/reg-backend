@@ -1,13 +1,14 @@
-{% include 'base.html' %}
+{% extends 'base.html' %}
 
 {% block content %}
-<img class="logo mb-4 mx-auto d-block" src="/static/img/logo_smiap.png" alt="smiap logo" >
-<div class="hor-center page-width">
-    <div class="form">
-        <div class="btn-group row" style="margin-left: auto;">
-            <a class="btn btn-primary btn-light text-dark" href="{% url 'main:login' %}">Войти</a>
-            <a class="btn btn-primary btn-light text-dark" target="_blank" href="https://confid.ru/registration">Зарегистрироваться</a>
+    <img class="logo mb-4 mx-auto d-block" src="/static/img/logo_smiap.png" alt="smiap logo" >
+    <div class="hor-center page-width">
+        {% include 'notifications.html' %}
+        <div class="form">
+            <div class="btn-group row" style="margin-left: auto;">
+                <a class="btn btn-primary btn-light text-dark" href="{% url 'main:login' %}">Войти</a>
+                <a class="btn btn-primary btn-light text-dark" target="_blank" href="https://confid.ru/registration">Зарегистрироваться</a>
+            </div>
         </div>
     </div>
-</div>
 {% endblock %}

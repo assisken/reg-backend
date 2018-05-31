@@ -1,14 +1,12 @@
-{% block notifications %}
-    {% if debug %}
-        <div class="alert alert-danger">Warning, app is running in debug mode!!!</div>
-    {% endif %}
-    {% if info %}
-        <div class="alert alert-warning">{{ info }}</div>
-    {% endif %}
-    {% if error %}
-        <div class="alert alert-danger">{{ error }}</div>
-    {% endif %}
-    {% if success %}
-        <div class="alert alert-success">{{ success }}</div>
-    {% endif %}
-{% endblock %}
+{% if debug %}
+    <div class="alert alert-danger">Warning, app is running in debug mode!!!</div>
+{% endif %}
+{% if info %}
+    <div class="alert alert-warning">{{ info }}</div>
+{% endif %}
+{% if error %}
+    <div class="alert alert-danger">{{ error }}</div>
+{% endif %}
+{% if success %}
+    <div class="alert alert-success">{{ success }}</div>
+{% endif %}
