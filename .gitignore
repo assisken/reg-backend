@@ -8,3 +8,4 @@ db.cfg
 migrations/
 log.txt
 uwsgi.ini
+secret.txt
