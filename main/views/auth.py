@@ -1,5 +1,4 @@
-from django.shortcuts import render, redirect
-from django.shortcuts import HttpResponse
+from django.shortcuts import redirect
 import main.utils as utils
 
 

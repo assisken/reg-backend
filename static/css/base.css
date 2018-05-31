@@ -77,6 +77,13 @@ input.last {
     border-radius: .3rem;
 }
 
+.form-text {
+    max-width: 1000px;
+    padding: 10px;
+    margin: 0 auto;
+    border-radius: .3rem;
+}
+
 .dropdown-content {
     display: none;
     position: absolute;

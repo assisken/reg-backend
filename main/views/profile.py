@@ -12,7 +12,9 @@ def info(request):
     except (KeyError, User.DoesNotExist):
         return redirect('main:login')
 
-    if not user.linux_user:
+    if not user.email_verified:
+        return render(request, 'email_verification.html')
+    elif not user.linux_user:
         return make_home(request, user)
 
     return render(request, 'profile_content/info.html', {'user': user, 'debug': DEBUG})
@@ -25,7 +27,9 @@ def instruction(request):
     except (KeyError, User.DoesNotExist):
         return redirect('main:login')
 
-    if not user.linux_user:
+    if not user.email_verified:
+        return render(request, 'email_verification.html')
+    elif not user.linux_user:
         return make_home(request, user)
 
     return render(request, 'profile_content/instruction.html', {'user': user, 'debug': DEBUG})
