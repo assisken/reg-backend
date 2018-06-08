@@ -119,6 +119,6 @@ def home_exists(name):
 
 
 def create_home(name, passwd):
-    it = sp.run('{base}/scripts/add.sh {name} {pwd}'.format(base=BASE_DIR, name=name, pwd=passwd),
+    it = sp.run('sudo {base}/scripts/add.sh {name} {pwd}'.format(base=BASE_DIR, name=name, pwd=passwd),
                 shell=True, stdout=sp.PIPE)
     print(it)

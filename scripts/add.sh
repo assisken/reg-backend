@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
-pass="$(mkpasswd $2)"
+PASS="$(mkpasswd $2)"
+USER="$1"
 
-#sudo useradd -p ${pass} -m -G students -s /bin/bash $1
+useradd -p ${PASS} -m -g students -s /bin/bash ${USER}
+#sudo edquota -p examplestudent ${USER}
 
-#sudo edquota -p examplestudent $1
+mkdir -p /home/${USER}/www/${USER}.mati.su
+chown -R ${USER}:students /home/${USER}
+chmod -R 705 /home/${USER}

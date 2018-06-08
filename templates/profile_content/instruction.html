@@ -18,10 +18,7 @@
         <li>Откройте проводник.</li>
         <li>В адресной строке введите следующий адрес:<br><code>ftp://{{ user.linux_user }}.mati.su</code></li>
         <li>Вводите свой логин и пароль</li>
-        <li>Создайте папку <code>www</code></li>
-        <li>Перейдите в эту папку</li>
-        <li>Создайте папку <code>{{ user.linux_user }}.mati.su</code></li>
-        <li>Перейдите в эту папку</li>
+        <li>Перейдите в папку <code>www</code>, затем в папку <code>{{ user.linux_user }}.mati.su</code></li>
         <li>Вставляете файлы сайта</li>
     </ol>
     <p>После вышеуказанных действий сайт должен быть доступен.</p>
@@ -29,7 +26,6 @@
     <hr>
     <div class="list-group list-group-item">
 <pre><code>ssh {{ user.linux_user }}@mati.su
-mkdir -p www/{{ user.linux_user }}.mati.su
 cd www/{{ user.linux_user }}.mati.su
 scp -r <i>путь_к_сайту</i> ssh://{{ user.linux_user }}@mati.su:/home/{{ user.linux_user }}/www/{{ user.linux_user }}.mati.su
 </code></pre>
