@@ -13,7 +13,7 @@ def index(request):
         except (KeyError, User.DoesNotExist):
             return render(request, 'index.html', {'debug': DEBUG})
 
-        return redirect('main:instruction')
+        return redirect('profile:instruction')
 
     else:
         raise Http404

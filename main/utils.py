@@ -1,3 +1,5 @@
+from django.shortcuts import redirect, render
+
 from stauth.settings import BASE_DIR
 import urllib.parse as up
 import subprocess as sp

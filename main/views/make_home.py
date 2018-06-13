@@ -8,7 +8,7 @@ from main.forms import LinuxUser
 
 def make_home(request, user):
     if user.linux_user:
-        return redirect('main:profile')
+        return redirect('profile:index')
 
     if request.method == 'GET':
         form = LinuxUser()
@@ -45,4 +45,4 @@ def make_home(request, user):
     user_filter = User.objects.filter(pk=user.id)
     user_filter.update(linux_user=linux_name)
 
-    return redirect('main:instruction')
+    return redirect('profile:instruction')
