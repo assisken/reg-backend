@@ -1,7 +1,5 @@
 from django.shortcuts import redirect, render
-import main.utils as utils
-from main.models import User
-from .make_home import make_home
+import main.utils.general as utils
 
 
 def auth(request):
@@ -23,18 +21,3 @@ def auth(request):
     request.session.set_expiry(0)
 
     return redirect('profile:index')
-
-
-def get_user(request):
-    try:
-        user_id = request.session['user-id']
-        user = User.objects.get(pk=user_id)
-    except (KeyError, User.DoesNotExist):
-        return redirect('main:login')
-
-    if not user.email_verified:
-        return render(request, 'email_verification.html')
-    elif not user.linux_user:
-        return make_home(request, user)
-
-    return user

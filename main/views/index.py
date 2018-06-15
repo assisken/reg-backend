@@ -9,7 +9,6 @@ def index(request):
     if request.method == 'GET':
         try:
             pk = request.session['user-id']
-            user = User.objects.get(pk=pk)
         except (KeyError, User.DoesNotExist):
             return render(request, 'index.html', {'debug': DEBUG})
 

@@ -4,7 +4,7 @@ import urllib.parse as up
 
 def login(request):
     if request.method == 'GET':
-        success = request.GET.get('success')
+        # success = request.GET.get('success')
         url = 'https://confid.ru/openid-connect/auth'
         client_id = 'students'
         response_type = 'code'

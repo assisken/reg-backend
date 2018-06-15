@@ -1,9 +1,22 @@
-from django.shortcuts import redirect, render, HttpResponse, Http404
+from django.shortcuts import redirect, render, Http404
+from django.urls import reverse_lazy
+from django.views.generic import FormView
+
 from stauth.settings import CREATE_HOME
 
-from main.utils import allowed_username, create_home, home_exists, username_exists
+from main.utils.general import allowed_username, create_home, home_exists, username_exists
 from main.models import User
 from main.forms import LinuxUser
+
+
+class MakeHome(FormView):
+    template_name = 'make_home.html'
+    form_class = LinuxUser
+    success_url = reverse_lazy('profile:instruction')
+
+    def get(self, request, *args, **kwargs):
+        return self.render_to_response(self.get_context_data())
+
 
 
 def make_home(request, user):

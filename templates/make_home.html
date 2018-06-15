@@ -4,7 +4,7 @@
     <img class="logo mb-4 mx-auto d-block" src="/static/img/logo_smiap.png" alt="smiap logo" >
     <div class="hor-center form bg-light">
         {% include 'notifications.html' %}
-        <form action="{% url 'main:profile' %}" method="post">
+        <form action="{% url 'profile:index' %}" method="post">
             {% csrf_token %}
             {% for f in form %}
                 <div class="form-group">

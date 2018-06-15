@@ -1,8 +1,19 @@
 from django.shortcuts import render
+from django.views.generic import DetailView, ListView
 
 from stauth.settings import DEBUG
 from main.models import User
-from main.views.auth import get_user
+from main.utils.get_user import get_user
+
+
+class ProfileIndex(DetailView):
+    model = User
+    template_name = 'profile_content/control_panel.html'
+    pk_url_kwarg = 'user_id'
+
+    def get_context_data(self, **kwargs):
+        context = super(ProfileIndex, self).get_context_data(**kwargs)
+        return context
 
 
 def info(request):
