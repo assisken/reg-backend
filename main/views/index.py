@@ -1,18 +1,16 @@
 from django.shortcuts import render, redirect
-from django.http import Http404
+from django.views import View
 
 from stauth.settings import DEBUG
 from main.models import User
 
 
-def index(request):
-    if request.method == 'GET':
+class Index(View):
+    template_name = 'index.html'
+
+    def get(self, request):
         try:
-            pk = request.session['user-id']
+            request.session['user-id']
         except (KeyError, User.DoesNotExist):
-            return render(request, 'index.html', {'debug': DEBUG})
-
+            return render(request, self.template_name, {'debug': DEBUG})
         return redirect('profile:instruction')
-
-    else:
-        raise Http404

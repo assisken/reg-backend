@@ -1,23 +1,26 @@
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect
+from django.views import View
+
 import main.utils.general as utils
 
 
-def auth(request):
-    state = request.GET.get('state')
-    if state != 'none':
-        return redirect('main:login')
+class Auth(View):
+    @staticmethod
+    def get(request):
+        state = request.GET.get('state')
+        if state != 'none':
+            return redirect('main:login')
 
-    code = request.GET.get('code')
+        code = request.GET.get('code')
+        token = utils.fetch_token(code)
 
-    token = utils.fetch_token(code)
+        if not isinstance(token, str):
+            return redirect('main:login')
 
-    if not isinstance(token, str):
-        return redirect('main:login')
+        usr = utils.fetch_user(token)
+        user = utils.lazy_add_user(usr)
 
-    usr = utils.fetch_user(token)
-    user = utils.lazy_add_user(usr)
+        request.session['user-id'] = user.id
+        request.session.set_expiry(0)
 
-    request.session['user-id'] = user.id
-    request.session.set_expiry(0)
-
-    return redirect('profile:index')
+        return redirect('profile:index')

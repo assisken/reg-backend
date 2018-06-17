@@ -1,13 +1,10 @@
-from django.shortcuts import redirect, render
+from django.shortcuts import render
+from django.views import View
 
-from main.models import User
+from profile.mixins import CheckUser
 from stauth.settings import DEBUG
-from main.utils.get_user import get_user
 
 
-def control_panel(request):
-    user = get_user(request)
-    if not isinstance(user, User):
-        return user
-
-    return render(request, 'profile_content/control_panel.html', {'user': user, 'debug': DEBUG})
+class ProfileControlPanel(CheckUser, View):
+    def get(self, request, user):
+        return render(request, 'profile_content/control_panel.html', {'user': user, 'debug': DEBUG})
