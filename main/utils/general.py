@@ -1,4 +1,4 @@
-from stauth.settings import BASE_DIR
+from stauth.settings import BASE_DIR, USE_SCRIPTS
 import urllib.parse as up
 import subprocess as sp
 import requests
@@ -119,6 +119,12 @@ def home_exists(name):
 
 
 def create_home(name, passwd):
-    it = sp.run('sudo {base}/scripts/add.sh {name} {pwd}'.format(base=BASE_DIR, name=name, pwd=passwd),
-                shell=True, stdout=sp.PIPE)
-    print(it)
+    if USE_SCRIPTS:
+        sp.run('sudo {base}/scripts/add.sh {name} {pwd}'.format(base=BASE_DIR, name=name, pwd=passwd),
+               shell=True, stdout=sp.PIPE)
+
+
+def reset_passwd(name, passwd):
+    if USE_SCRIPTS:
+        sp.run('sudo {base}/scripts/reset_password.sh {name} {pwd}'.format(base=BASE_DIR, name=name, pwd=passwd),
+               shell=True, stdout=sp.PIPE)

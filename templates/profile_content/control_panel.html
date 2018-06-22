@@ -1,10 +1,27 @@
 {% extends 'profile.html' %}
+{% load staticfiles %}
+
+{% block head %}
+    <script src="{% static 'js/linux_password_reset.js' %}"></script>
+{% endblock %}
 
 {% block profile_content %}
     <h4>Панель управления</h4>
     <hr>
-    <p>LL</p>
-    {% for user in object_list %}
-        <p>{{ user }}</p>
-    {% endfor %}
+    <h5>Сброс пароля</h5>
+
+    <div id="notification" style="display: none;">
+        <span class="dismiss"><a title="dismiss this notification">x</a></span>
+    </div>
+
+    <form id="passreset" class="form-inline" action="{% url 'profile:linux_pass_reset' %}" method="post">
+        {% csrf_token %}
+        {% for form in linux_pass_reset_form %}
+            <div class="form-group">
+                <label>{{ form.label }}:</label>
+                {{ form }}
+            </div>
+        {% endfor %}
+        <input type="submit" value="Сбросить" class="btn btn-primary"/>
+    </form>
 {% endblock %}

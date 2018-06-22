@@ -90,7 +90,8 @@ input.last {
     z-index: 1;
 }
 
-.dropdown-content a {
+.dropdown-content .nav-link {
+    padding-left: .5rem;
     display: block;
 }
 
@@ -136,4 +137,27 @@ input.last {
 .profile pre {
     display: inline;
     margin: 0;
+}
+
+.form-inline .form-group {
+    padding-right: .5rem;
+}
+
+.form-inline label {
+    padding-right: .5rem;
+}
+
+#notify-container {
+    /*display: none;*/
+    width: 25rem;
+    position: fixed;
+    top: 3rem;
+    right: 1rem;
+    z-index: 1;
+}
+
+#notify-container .alert {
+    display: none;
+    margin-bottom: 1rem;
+    cursor: pointer;
 }

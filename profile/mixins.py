@@ -1,10 +1,10 @@
 from django.shortcuts import redirect, render
 
 from main.models import User
-from main.views.make_home import make_home, MakeHome
+from main.views.make_home import MakeHome
 
 
-class CheckUser:
+class UserRequired:
     def dispatch(self, request, *args, **kwargs):
         try:
             user_id = request.session['user-id']
