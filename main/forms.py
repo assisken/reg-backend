@@ -4,7 +4,7 @@ from django import forms
 
 class LinuxUser(forms.Form):
     linux_name = forms.CharField(
-        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'vasya'}),
+        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'student123'}),
         label='Имя пользователя',
         required=True,
         max_length=30,
