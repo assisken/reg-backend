@@ -21,6 +21,7 @@ class Auth(View):
         user = utils.lazy_add_user(usr)
 
         request.session['user-id'] = user.id
+        request.session['token'] = token
         request.session.set_expiry(0)
 
         return redirect('profile:index')

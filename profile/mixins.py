@@ -1,6 +1,7 @@
 from django.shortcuts import redirect, render
 
 from main.models import User
+from main.views.EmailConfirm import EmailConfirm
 from main.views.make_home import MakeHome
 
 
@@ -12,7 +13,8 @@ class UserRequired:
         except (KeyError, User.DoesNotExist):
             return redirect('main:login')
         if not user.email_verified:
-            return render(request, 'email_verification.html')
+            return EmailConfirm().dispatch(request, user)
+            # return render(request, 'email_confirm.html')
         elif not user.linux_user:
             return MakeHome().dispatch(request, user)
             # return make_home(request, user)
