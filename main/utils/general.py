@@ -63,7 +63,7 @@ def lazy_add_user(user):
             gender=user['gender'],
             birthdate=user['birthdate'],
             zoneinfo=user['zoneinfo'],
-            # locale=user['locale'],
+            locale=user['locale'],
             updated_at=user['updated_at'],
             email=user['email'],
             email_verified=user['email_verified'],

@@ -2,8 +2,10 @@ from django.db import models
 
 
 class User(models.Model):
-    LOCALES = (('ru-RU', 'Российская'),
-               ('en-US', 'English'))
+    LOCALES = (
+        ('ru-RU', 'Российская'),
+        ('en-US', 'English'),
+    )
 
     # Есть в коде
     email = models.CharField(max_length=30)
@@ -13,7 +15,7 @@ class User(models.Model):
     middle_name = models.CharField(max_length=255, default=None)
     picture = models.CharField(max_length=40, default=None, null=True, blank=True)
     birthdate = models.DateField()
-    locale = models.CharField(choices=LOCALES, max_length=5)
+    locale = models.CharField(max_length=5, choices=LOCALES)
 
     # Нет в коде, но есть в API
     name = models.CharField(max_length=255, null=True, blank=True)
