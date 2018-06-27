@@ -11,6 +11,10 @@ main {
     min-height: 100vh;
 }
 
+p:last-of-type {
+    margin-bottom: 0;
+}
+
 .info {
     background-color: #fff;
     padding: 8px 15px;
