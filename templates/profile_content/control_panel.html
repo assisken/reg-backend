@@ -2,26 +2,62 @@
 {% load staticfiles %}
 
 {% block head %}
-    <script src="{% static 'js/linux_password_reset.js' %}"></script>
+    <script src="{% static 'js/password.js' %}"></script>
 {% endblock %}
 
 {% block profile_content %}
     <h4>Панель управления</h4>
     <hr>
     <h5>Сброс пароля</h5>
-
-    <div id="notification" style="display: none;">
-        <span class="dismiss"><a title="dismiss this notification">x</a></span>
-    </div>
-
     <form id="passreset" class="form-inline" action="{% url 'profile:linux_pass_reset' %}" method="post">
         {% csrf_token %}
-        {% for form in linux_pass_reset_form %}
+        {% for form in pass_reset_form %}
             <div class="form-group">
                 <label>{{ form.label }}:</label>
                 {{ form }}
             </div>
         {% endfor %}
-        <input type="submit" value="Сбросить" class="btn btn-primary"/>
+        <input type="submit" value="Сбросить" class="btn btn-primary">
     </form>
+    <hr>
+    <h5>База данных</h5>
+    {% if user.db_count > 0 %}
+        <p>Ваш логин для базы данных: <code>{{ user.linux_user }}</code></p>
+        <p>Ваш пароль для базы данных: <code>{{ user.db_pass }}</code></p>
+        Список доступных баз данных:
+        <ul>
+            {% for db_name in db_select %}
+                <li>{{ db_name }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    {% if user.db_count == 0 %}
+        <p>Вы можете создать базу данных. Для этого вам необходимо ввести пароль для базы данных и нажать "Создать".</p>
+        <br>
+    {% elif user.db_count == 5 %}
+        <p>К сожалению, у вас не может быть баз данных больше, чем {{ user.db_count }}.</p>
+    {% else %}
+        <p>Вы можете создать ещё баз данных! На данный момент у вас создано <b>{{ user.db_count }} из {{ max_db }}</b>.</p>
+    {% endif %}
+    {% if user.db_count < max_db %}
+        <form id="dbcreate" class="form-inline" action="{% url 'profile:create_db' %}" method="post">
+            {% csrf_token %}
+            {% if user.db_count == 0 %}
+                {% for form in db_pass_form %}
+                    <div class="form-group">
+                        <label>{{ form.label }}:</label>
+                        {{ form }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+            <input type="submit" value="Создать" class="btn big-red-button">
+        </form>
+    {% endif %}
+    {% if user.db_count > 0 %}
+        <form action="{% url 'profile:remove_db' %}" method="post">
+            {% csrf_token %}
+            <input type="submit" value="Удалить последнюю" class="btn big-red-button">
+        </form>
+    {% endif %}
 {% endblock %}

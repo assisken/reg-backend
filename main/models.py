@@ -1,4 +1,7 @@
+from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
+
+from stauth.settings import MAX_DB
 
 
 class User(models.Model):
@@ -30,6 +33,10 @@ class User(models.Model):
 
     # Кастомные поля
     linux_user = models.CharField(max_length=20, null=True, blank=True)
+    db_count = models.IntegerField(
+        default=0, validators=[MaxValueValidator(MAX_DB), MinValueValidator(0)]
+    )
+    db_pass = models.CharField(max_length=255, null=True, blank=True, default=None)
 
     def __str__(self):
         return '[{sub}] {name} {family} {middle} ({pref})' \

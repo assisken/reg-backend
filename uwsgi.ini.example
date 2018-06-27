@@ -8,4 +8,4 @@ pidfile = /tmp/project-master.pid
 socket = 127.0.0.1:8001
 vacuum = True
 max-requests = 5000
-
+workers = 4

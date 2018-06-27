@@ -165,3 +165,11 @@ input.last {
     margin-bottom: 1rem;
     cursor: pointer;
 }
+
+.big-red-button {
+    width: 100%;
+    background-color: red;
+    font-size: 5rem;
+    margin-top: .5rem;
+    text-transform: uppercase;
+}

@@ -1,23 +1,22 @@
-$(function() {
-    var book_link = 'http://www.gigamonkeys.com/book/';
+function Reset(id, on_success) {
+    const book_link = 'http://www.gigamonkeys.com/book/';
 
-    $('#passreset').submit(function(e) {
+    $(id).submit(function(e) {
         var form = $(this);
         $.ajax({
             type: form.attr('method'),
             url: form.attr('action'),
             data: form.serialize()
         }).done(function(text) {
-            $('#passreset').each(function(){
+            $(id).each(function(){
                 this.reset();
             });
 
             var res = JSON.parse(text);
 
-            if(res.success) {
-                notify('success', 'Пароль успешно обновлён!');
-            } else {
-                notify('danger', res.message)
+            notify(res.type, res.message);
+            if(res.type === 'success') {
+                on_success();
             }
         }).fail(function() {
             notify('danger', 'Произошла ошибка. Попробуйте позже.\n' +
@@ -27,5 +26,12 @@ $(function() {
 
         // Отмена действия по умолчанию для кнопки submit.
         e.preventDefault();
+    });
+}
+
+$(function() {
+    Reset('#passreset');
+    Reset('#dbcreate', function () {
+        location.reload()
     });
 });
