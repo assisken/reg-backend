@@ -5,7 +5,6 @@ __pycache__/
 .idea/
 *.cfg
 
-migrations/
 log.txt
 uwsgi.ini
 secret.txt
