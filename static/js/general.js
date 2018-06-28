@@ -8,6 +8,9 @@ function notify(type, text) {
     notification.click(function() {
         notification.fadeOut('slow', function () {this.remove();});
     });
+    setTimeout(function () {
+        notification.fadeOut('slow', function () {this.remove();})
+    }, 10000)
 }
 
 $('#alert-success').click(function(){
