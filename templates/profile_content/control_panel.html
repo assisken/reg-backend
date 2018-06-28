@@ -8,7 +8,7 @@
 {% block profile_content %}
     <h4>Панель управления</h4>
     <hr>
-    <h5>Сброс пароля</h5>
+    <h5>Аккаунт на сервере</h5>
     <form id="passreset" class="form-inline" action="{% url 'profile:linux_pass_reset' %}" method="post">
         {% csrf_token %}
         {% for form in pass_reset_form %}
@@ -20,44 +20,66 @@
         <input type="submit" value="Сбросить" class="btn btn-primary">
     </form>
     <hr>
-    <h5>База данных</h5>
-    {% if user.db_count > 0 %}
-        <p>Ваш логин для базы данных: <code>{{ user.linux_user }}</code></p>
-        <p>Ваш пароль для базы данных: <code>{{ user.db_pass }}</code></p>
-        Список доступных баз данных:
-        <ul>
-            {% for db_name in db_select %}
-                <li>{{ db_name }}</li>
+    <h5>Базы данных</h5>
+    {% if user.db_password %}
+        <h6>Сброс пароля пользователя</h6>
+        <form id="dbpassreset" class="form-inline" action="{% url 'profile:db_user_reset' %}" method="post">
+            {% csrf_token %}
+            {% for form in db_reset_pass_form %}
+                <div class="form-group">
+                    <label>{{ form.label }}:</label>
+                    {{ form }}
+                </div>
             {% endfor %}
-        </ul>
-    {% endif %}
-
-    {% if user.db_count == 0 %}
-        <p>Вы можете создать базу данных. Для этого вам необходимо ввести пароль для базы данных и нажать "Создать".</p>
+            <input type="submit" value="Сбросить" class="btn btn-primary">
+        </form>
         <br>
-    {% elif user.db_count == 5 %}
-        <p>К сожалению, у вас не может быть баз данных больше, чем {{ user.db_count }}.</p>
-    {% else %}
-        <p>Вы можете создать ещё баз данных! На данный момент у вас создано <b>{{ user.db_count }} из {{ max_db }}</b>.</p>
-    {% endif %}
-    {% if user.db_count < max_db %}
+        <p>Ваш логин для БД: {{ user.linux_user }}
+            <br>
+            Ваш пароль для БД: {{ user.db_password }}</p>
+        <p>Список ваших баз данных:</p>
+        <ul>
+        {% for db in databases %}
+            <li>{{ db.pname }}</li>
+        {% empty %}
+            <li>К сожалению, у вас нет баз данных</li>
+        {% endfor %}
+        </ul>
+        <h5>Создать базу данных</h5>
         <form id="dbcreate" class="form-inline" action="{% url 'profile:create_db' %}" method="post">
             {% csrf_token %}
-            {% if user.db_count == 0 %}
-                {% for form in db_pass_form %}
-                    <div class="form-group">
-                        <label>{{ form.label }}:</label>
-                        {{ form }}
-                    </div>
-                {% endfor %}
-            {% endif %}
-            <input type="submit" value="Создать" class="btn big-red-button">
+            {% for form in db_form %}
+                <div class="form-group">
+                    <label>{{ form.label }}</label>
+                    {{ form }}
+                </div>
+            {% endfor %}
+            <input type="submit" value="Создать" class="btn btn-primary">
         </form>
-    {% endif %}
-    {% if user.db_count > 0 %}
-        <form action="{% url 'profile:remove_db' %}" method="post">
+        <br>
+        <h5>Удалить базу данных</h5>
+        <form id="dbdel" class="form-inline" action="{% url 'profile:remove_db' %}" method="post">
             {% csrf_token %}
-            <input type="submit" value="Удалить последнюю" class="btn big-red-button">
+            <div class="form-group">
+                {{ db_multiple_form }}
+            </div>
+            <input type="submit" value="Удалить" class="btn btn-primary">
         </form>
+
+    {% else %}
+        <h6>Установка пароля пользователя</h6>
+        <form id="dbpasscreate" class="form-inline" action="{% url 'profile:db_user_create' %}" method="post">
+            {% csrf_token %}
+            {% for form in db_reset_pass_form %}
+                <div class="form-group">
+                    <label>{{ form.label }}:</label>
+                    {{ form }}
+                </div>
+            {% endfor %}
+            <input type="submit" value="Установить" class="btn btn-primary">
+        </form>
+
     {% endif %}
+
+
 {% endblock %}

@@ -1,4 +1,4 @@
-function Reset(id, on_success) {
+function Reset(id, on_success, on_failure) {
     const book_link = 'http://www.gigamonkeys.com/book/';
 
     $(id).submit(function(e) {
@@ -16,12 +16,12 @@ function Reset(id, on_success) {
 
             notify(res.type, res.message);
             if(res.type === 'success') {
-                on_success();
+                on_success(res.message);
             }
         }).fail(function() {
-            notify('danger', 'Произошла ошибка. Попробуйте позже.\n' +
+            notify('danger', 'Произошла ошибка. Попробуйте обратиться к администратору.' +
                 'Если вы не знаете, чем себя занять, рекомендуем почитать эту ' +
-                '<a href="'+book_link+'" target="_blank">книгу</a>.')
+                '<a href="'+book_link+'" target="_blank">книгу</a>.');
         });
 
         // Отмена действия по умолчанию для кнопки submit.
@@ -31,7 +31,20 @@ function Reset(id, on_success) {
 
 $(function() {
     Reset('#passreset');
+    Reset('#dbpasscreate', function () {
+        setTimeout(function () {
+            location.reload()
+        }, 2000)
+    });
+    Reset('#dbpassreset');
     Reset('#dbcreate', function () {
-        location.reload()
+        setTimeout(function () {
+            location.reload()
+        }, 2000)
+    });
+    Reset('#dbdel', function () {
+        setTimeout(function () {
+            location.reload()
+        }, 2000)
     });
 });

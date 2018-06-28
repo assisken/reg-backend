@@ -1,7 +1,7 @@
 from django.shortcuts import redirect, render
 
 from main.models import User
-from main.views.EmailConfirm import EmailConfirm
+from main.views.email_confirm import EmailConfirm
 from main.views.make_home import MakeHome
 
 

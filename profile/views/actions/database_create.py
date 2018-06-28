@@ -1,9 +1,12 @@
 import json
 
+from django.db import IntegrityError
 from django.http import HttpResponseServerError, HttpResponse
 from django.views import View
 from mysql import connector
 
+from profile.forms import DatabaseForm
+from profile.models import Database
 from profile.mixins import UserRequired
 from stauth.settings import DB_CONFIG, MAX_DB
 
@@ -11,24 +14,33 @@ from stauth.settings import DB_CONFIG, MAX_DB
 class DatabaseCreate(UserRequired, View):
     def post(self, request, user):
         resp = {'type': None, 'message': None}
-        max_db = MAX_DB
-        pwd = request.POST.get('pwd', '')
-        pwdcnf = request.POST.get('pwdcnf', '')
 
-        if pwd != pwdcnf:
+        form = DatabaseForm(request.POST)
+        if not form.is_valid():
+            message = ''
+
+            # TODO: обвязать функцией эту дрисню
+            for _, error in form.errors.as_data().items():
+                for vld_error in error:
+                    for msg in vld_error:
+                        message += msg
+
             resp['type'] = 'danger'
-            resp['message'] = 'Пароли не совпадают!'
+            resp['message'] = message
             return HttpResponse(json.dumps(resp, ensure_ascii=False))
 
-        if user.db_count == MAX_DB:
+        db_name = form.cleaned_data.get('name')
+
+        databases = Database.objects.filter(owner=user)
+        db_count = len(databases)
+
+        if db_count >= MAX_DB:
             resp['type'] = 'danger'
-            resp['message'] = 'Больше создавать баз данных нельзя!'
+            resp['message'] = 'Вы не божете создать больше, чем {}!'.format(MAX_DB)
             return HttpResponse(json.dumps(resp, ensure_ascii=False))
 
         try:
-            database_name = '{}_{}'.format(user.linux_user, user.db_count+1)
             host = DB_CONFIG.get('client', 'host')
-
             con = connector.connect(
                 user=DB_CONFIG.get('client', 'user'),
                 password=DB_CONFIG.get('client', 'password'),
@@ -36,24 +48,24 @@ class DatabaseCreate(UserRequired, View):
             )
             cur = con.cursor()
             cur._defer_warnings = False
-            cur.execute("CREATE DATABASE IF NOT EXISTS {};".format(database_name))
-            cur.execute("CREATE USER IF NOT EXISTS %s@%s IDENTIFIED BY %s;",
-                        (user.linux_user, host, pwd))
-            cur.execute("grant all on `{}_%`.* to %s@%s;".format(user.linux_user),
-                        (user.linux_user, host))
-
-            user.db_count += 1
-            if user.db_count > max_db:
-                user.db_count = max_db
-            user.db_pass = pwd
-            con.close()
-            user.save()
-
-            resp['type'] = 'success'
-            resp['message'] = 'База данных успешно создана!'
-
+            cur.execute("CREATE DATABASE IF NOT EXISTS {}_{};".format(user.linux_user, db_name))
         except Exception as e:
             resp['type'] = 'danger'
-            resp['message'] = e
-            raise HttpResponseServerError
+            resp['message'] = str(e)
+            return HttpResponse(json.dumps(resp, ensure_ascii=False))
+        else:
+            cur.close()
+            con.close()
+
+        try:
+            db = Database.objects.create(name=db_name, owner=user)
+            db.save()
+        except IntegrityError:
+            resp['type'] = 'danger'
+            resp['message'] = 'База данных с таким именем уже существует!'
+            return HttpResponse(json.dumps(resp, ensure_ascii=False))
+
+        resp['type'] = 'success'
+        resp['message'] = 'База данных успешно создана!'
+
         return HttpResponse(json.dumps(resp, ensure_ascii=False))

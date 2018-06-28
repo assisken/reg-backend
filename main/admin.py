@@ -7,3 +7,4 @@ class UserAdmin(admin.ModelAdmin):
     list_display = ('sub', 'family_name', 'given_name', 'middle_name', 'email', 'email_verified',)
     ordering = ('sub',)
     list_filter = ('email_verified',)
+    exclude = ('db_password',)

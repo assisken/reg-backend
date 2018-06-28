@@ -151,6 +151,10 @@ input.last {
     padding-right: .5rem;
 }
 
+select {
+    min-width: 20.8rem;
+}
+
 #notify-container {
     /*display: none;*/
     width: 25rem;

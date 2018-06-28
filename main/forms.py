@@ -7,7 +7,7 @@ class LinuxUser(forms.Form):
         widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'student123'}),
         label='Имя пользователя',
         required=True,
-        max_length=30,
+        max_length=20,
         validators=[RegexValidator(regex=r'^[a-z]([a-z0-9-]{0,31}|[a-z0-9-]{0,30}\$)$')]
     )
     pwd = forms.CharField(
