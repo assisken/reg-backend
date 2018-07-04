@@ -1,3 +1,4 @@
+from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect, render, Http404
 from django.urls import reverse_lazy
 from django.views import View
@@ -12,16 +13,14 @@ class MakeHome(View):
     form_class = LinuxUser
     success_url = reverse_lazy('profile:instruction')
 
-    def get(self, request, _):
+    def get(self, request: HttpRequest, _) -> HttpResponse:
         return render(request, 'make_home.html', {'form': self.form_class})
 
-    def post(self, request, user):
+    def post(self, request: HttpRequest, user: User) -> HttpResponse:
         form = self.form_class(request.POST)
-        linux_name = request.POST.get('linux_name', '')
-        pwd = request.POST.get('pwd', '')
-        pwdcnf = request.POST.get('pwdcnf', '')
-
-        print(linux_name, pwd, pwdcnf)
+        linux_name = request.POST['linux_name']
+        pwd = request.POST['pwd']
+        pwdcnf = request.POST['pwdcnf']
 
         if pwd != pwdcnf:
             return self.error(request, 'Пароли не совпадают')

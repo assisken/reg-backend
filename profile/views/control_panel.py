@@ -1,6 +1,8 @@
+from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
 from django.views import View
 
+from main.models import User
 from profile.forms import LinuxPassResetForm, DatabaseForm, DbPassResetForm, DbSelectMultipleForm
 from profile.mixins import UserRequired
 from profile.models import Database
@@ -8,7 +10,7 @@ from stauth.settings import DEBUG, MAX_DB
 
 
 class ProfileControlPanel(UserRequired, View):
-    def get(self, request, user):
+    def get(self, request: HttpRequest, user: User) -> HttpResponse:
         databases = Database.objects.filter(owner=user)
         return render(request, 'profile_content/control_panel.html', {
             'user': user,

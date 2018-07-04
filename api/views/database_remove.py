@@ -1,6 +1,6 @@
 import json
 
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpRequest
 from django.views import View
 from mysql import connector
 
@@ -9,9 +9,9 @@ from stauth.settings import DB_CONFIG
 
 
 class DatabaseRemove(View):
-    def post(self, request):
+    def post(self, request: HttpRequest) -> HttpResponse:
         resp = {'type': None, 'message': None}
-        pname = request.POST.get('select', '')
+        pname = request.POST['select']
 
         try:
             host = DB_CONFIG.get('client', 'host')

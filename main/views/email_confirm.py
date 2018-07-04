@@ -1,15 +1,16 @@
 import json
 
-from django.http import HttpResponse, HttpResponseServerError
+from django.http import HttpResponse, HttpResponseServerError, HttpRequest
 from django.shortcuts import render, redirect
 from django.views import View
 
+from main.models import User
 from main.utils.general import fetch_user
 from stauth.settings import DEBUG
 
 
 class EmailConfirm(View):
-    def get(self, request, user):
+    def get(self, request: HttpRequest, user: User) -> HttpResponse:
         if user.email_verified:
             return redirect('profile:instruction')
 

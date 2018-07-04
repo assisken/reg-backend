@@ -1,3 +1,4 @@
+from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect
 from django.views import View
 
@@ -6,12 +7,12 @@ import main.utils.general as utils
 
 class Auth(View):
     @staticmethod
-    def get(request):
-        state = request.GET.get('state')
+    def get(request: HttpRequest) -> HttpResponse:
+        state = request.GET['state']
         if state != 'none':
             return redirect('main:login')
 
-        code = request.GET.get('code')
+        code = request.GET['code']
         token = utils.fetch_token(code)
 
         if not isinstance(token, str):
@@ -23,5 +24,5 @@ class Auth(View):
         request.session['user-id'] = user.id
         request.session['token'] = token
         request.session.set_expiry(0)
-
+        
         return redirect('profile:index')

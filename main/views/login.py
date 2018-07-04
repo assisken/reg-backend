@@ -19,5 +19,5 @@ class Login(View):
                 state=state,
                 redir=redir)
 
-    def get(self, _):
+    def get(self, _) -> HttpResponseRedirect:
         return HttpResponseRedirect(self.redirect_url)

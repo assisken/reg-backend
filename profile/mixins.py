@@ -1,4 +1,4 @@
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect
 
 from main.models import User
 from main.views.email_confirm import EmailConfirm

@@ -1,16 +1,17 @@
 import json
 
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpRequest
 from django.views import View
 from mysql import connector
 
+from main.models import User
 from profile.forms import DbPassResetForm
 from profile.mixins import UserRequired
 from stauth.settings import DB_CONFIG
 
 
 class DbUserReset(UserRequired, View):
-    def post(self, request, user):
+    def post(self, request: HttpRequest, user: User):
         resp = {'type': None, 'message': None}
         form = DbPassResetForm(request.POST)
 

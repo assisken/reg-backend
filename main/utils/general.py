@@ -1,3 +1,5 @@
+from requests import Response
+
 from stauth.settings import BASE_DIR, USE_SCRIPTS
 import urllib.parse as up
 import subprocess as sp
@@ -35,14 +37,14 @@ def fetch_token(code):
     return token
 
 
-def fetch_user(token):
+def fetch_user(token: str) -> dict:
     url = 'https://confid.ru/openid-connect/userinfo'
     headers = {
         'Host': 'confid.ru',
         'Content-Type': 'application/x-www-form-urlencoded',
         'Authorization': 'Authorization: Bearer {token}'.format(token=token)
     }
-    r = requests.post(url, headers=headers)
+    r: Response = requests.post(url, headers=headers)
     return r.json()
 
 

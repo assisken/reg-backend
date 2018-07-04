@@ -9,7 +9,7 @@
     <h4>Панель управления</h4>
     <hr>
     <h5>Аккаунт на сервере</h5>
-    <form id="passreset" class="form-inline" action="{% url 'profile:linux_pass_reset' %}" method="post">
+    <form id="passreset" class="form-inline" action="{% url 'api:linux_pass_reset' %}" method="post">
         {% csrf_token %}
         {% for form in pass_reset_form %}
             <div class="form-group">
@@ -23,7 +23,7 @@
     <h5>Базы данных</h5>
     {% if user.db_password %}
         <h6>Сброс пароля пользователя</h6>
-        <form id="dbpassreset" class="form-inline" action="{% url 'profile:db_user_reset' %}" method="post">
+        <form id="dbpassreset" class="form-inline" action="{% url 'api:db_user_reset' %}" method="post">
             {% csrf_token %}
             {% for form in db_reset_pass_form %}
                 <div class="form-group">
@@ -46,7 +46,7 @@
         {% endfor %}
         </ul>
         <h5>Создать базу данных</h5>
-        <form id="dbcreate" class="form-inline" action="{% url 'profile:create_db' %}" method="post">
+        <form id="dbcreate" class="form-inline" action="{% url 'api:create_db' %}" method="post">
             {% csrf_token %}
             {% for form in db_form %}
                 <div class="form-group">
@@ -58,7 +58,7 @@
         </form>
         <br>
         <h5>Удалить базу данных</h5>
-        <form id="dbdel" class="form-inline" action="{% url 'profile:remove_db' %}" method="post">
+        <form id="dbdel" class="form-inline" action="{% url 'api:remove_db' %}" method="post">
             {% csrf_token %}
             <div class="form-group">
                 {{ db_multiple_form }}
@@ -68,7 +68,7 @@
 
     {% else %}
         <h6>Установка пароля пользователя</h6>
-        <form id="dbpasscreate" class="form-inline" action="{% url 'profile:db_user_create' %}" method="post">
+        <form id="dbpasscreate" class="form-inline" action="{% url 'api:db_user_create' %}" method="post">
             {% csrf_token %}
             {% for form in db_reset_pass_form %}
                 <div class="form-group">
