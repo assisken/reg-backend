@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.views import View
 
 from stauth.settings import DEBUG
-from main.models import User
+from main.models.user import User
 
 
 class Index(View):

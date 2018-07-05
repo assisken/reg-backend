@@ -5,7 +5,7 @@ import urllib.parse as up
 import subprocess as sp
 import requests
 
-from main.models import User
+from main.models.user import User
 
 
 def fetch_token(code):

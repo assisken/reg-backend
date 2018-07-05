@@ -4,7 +4,7 @@ from django.http import HttpResponse, HttpResponseServerError, HttpRequest
 from django.shortcuts import render, redirect
 from django.views import View
 
-from main.models import User
+from main.models.user import User
 from main.utils.general import fetch_user
 from stauth.settings import DEBUG
 

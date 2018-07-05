@@ -1,11 +1,11 @@
 import json
 
 from django.db import IntegrityError
-from django.http import HttpResponseServerError, HttpResponse, HttpRequest
+from django.http import HttpResponse, HttpRequest
 from django.views import View
 from mysql import connector
 
-from main.models import User
+from main.models.user import User
 from profile.forms import DatabaseForm
 from profile.models import Database
 from profile.mixins import UserRequired

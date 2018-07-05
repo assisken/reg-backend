@@ -1,10 +1,10 @@
 from django.http import HttpRequest, HttpResponse
-from django.shortcuts import redirect, render, Http404
+from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views import View
 
 from main.forms import LinuxUser
-from main.models import User
+from main.models.user import User
 from main.utils.general import allowed_username, create_home, home_exists, username_exists
 
 

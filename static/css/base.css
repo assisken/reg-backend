@@ -177,3 +177,9 @@ select {
     margin-top: .5rem;
     text-transform: uppercase;
 }
+
+.group {
+    padding: .2rem .5rem;
+    margin-top: .2rem;
+    cursor: default;
+}

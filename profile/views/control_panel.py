@@ -2,11 +2,12 @@ from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
 from django.views import View
 
-from main.models import User
+from main.models.user import User
+from main.models.user_group import UserGroup
 from profile.forms import LinuxPassResetForm, DatabaseForm, DbPassResetForm, DbSelectMultipleForm
 from profile.mixins import UserRequired
 from profile.models import Database
-from stauth.settings import DEBUG, MAX_DB
+from stauth.settings import DEBUG
 
 
 class ProfileControlPanel(UserRequired, View):

@@ -1,7 +1,7 @@
 from django.core.validators import RegexValidator
 from django.db import models
 
-from main.models import User
+from main.models.user import User
 
 
 class Database(models.Model):

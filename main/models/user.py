@@ -1,7 +1,6 @@
-from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 
-from stauth.settings import MAX_DB
+from .user_group import UserGroup
 
 
 class User(models.Model):
@@ -34,6 +33,7 @@ class User(models.Model):
     # Кастомные поля
     linux_user = models.CharField(max_length=20, null=True, blank=True)
     db_password = models.CharField(max_length=255, null=True, blank=True)
+    groups = models.ManyToManyField(UserGroup, blank=True)
 
     def __str__(self):
         return '[{sub}] {name} {family} {middle} ({pref})' \
@@ -56,3 +56,6 @@ class User(models.Model):
             'E-mail': self.email,
             'Домен': '{name}.mati.su'.format(name=self.linux_user)
         }
+
+    def is_teacher(self):
+        return self.groups.get(name='Преподаватель')

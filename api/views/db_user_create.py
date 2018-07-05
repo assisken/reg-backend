@@ -4,7 +4,7 @@ from django.http import HttpResponse, HttpRequest
 from django.views import View
 from mysql import connector
 
-from main.models import User
+from main.models.user import User
 from profile.forms import DbPassResetForm
 from profile.mixins import UserRequired
 from stauth.settings import DB_CONFIG

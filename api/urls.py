@@ -1,9 +1,5 @@
 from django.urls import path
-from api.views.linux_pass_reset import LinuxPassReset
-from api.views.database_create import DatabaseCreate
-from api.views.database_remove import DatabaseRemove
-from api.views.db_user_create import DbUserCreate
-from api.views.db_user_reset import DbUserReset
+from .views import LinuxPassReset, DatabaseCreate, DatabaseRemove, DbUserCreate, DbUserReset
 
 urlpatterns = [
     path('linux-pass-reset', LinuxPassReset.as_view(), name='linux_pass_reset'),

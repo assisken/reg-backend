@@ -10,10 +10,18 @@
         <div class="profile row no-gutters text-dark">
             <div class="col-md-2 text-center">
                 <img class="rounded-circle img-thumbnail" src="https://confid.ru/data/avatars/{{ user.get_avatar }}">
+                {% for group in user.groups.all %}
+                    <div class="row">
+                        <span class="bg-primary rounded text-light hor-center group">{{ group }}</span>
+                    </div>
+                {% endfor %}
                 <div class="list-group">
                     <a href="{% url 'profile:panel' %}" class="list-group-item {% active 'profile:panel' %}">Управление</a>
                     <a href="{% url 'profile:index' %}" class="list-group-item {% active 'profile:index' %}">О себе</a>
                     <a href="{% url 'profile:instruction' %}" class="list-group-item {% active 'profile:instruction' %}">Инструкция</a>
+                    {% if user.is_teacher %}
+                        <a href="{% url 'profile:teacher' %}" class="list-group-item {% active 'profile:teacher' %}">Панель преподавателя</a>
+                    {% endif %}
                 </div>
             </div>
             <div class="profile-content col-md-10">

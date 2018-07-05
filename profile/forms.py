@@ -1,7 +1,7 @@
 from django import forms
 
 from .models import Database
-from main.models import User
+from main.models.user import User
 
 
 class LinuxPassResetForm(forms.Form):

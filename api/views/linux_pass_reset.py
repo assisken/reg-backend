@@ -3,7 +3,7 @@ from django.shortcuts import HttpResponse
 from django.views import View
 import json
 
-from main.models import User
+from main.models.user import User
 from profile.forms import LinuxPassResetForm
 from profile.mixins import UserRequired
 from main.utils.general import reset_passwd
