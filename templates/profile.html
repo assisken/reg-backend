@@ -8,7 +8,7 @@
         {% include 'notifications.html' %}
 
         <div class="profile row no-gutters text-dark">
-            <div class="col-md-2 text-center">
+            <div class="text-center profile-nav">
                 <img class="rounded-circle img-thumbnail" src="https://confid.ru/data/avatars/{{ user.get_avatar }}">
                 {% for group in user.groups.all %}
                     <div class="row">
@@ -24,7 +24,7 @@
                     {% endif %}
                 </div>
             </div>
-            <div class="profile-content col-md-10">
+            <div class="profile-content col-md-9">
                 {% block profile_content %}
                 {% endblock %}
             </div>

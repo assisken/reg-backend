@@ -37,5 +37,5 @@ class DatabaseRemove(View):
         resp['type'] = 'success'
         resp['message'] = 'База данных успешно удалена!'
 
-        return HttpResponse(json.dumps(resp, ensure_ascii=False))
+        return HttpResponse(json.dumps(resp, ensure_ascii=False), content_type='application/json')
         # return redirect('profile:panel')

@@ -2,17 +2,17 @@ from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect
 from django.views import View
 
-import main.utils.general as utils
+import utils.general as utils
 
 
 class Auth(View):
     @staticmethod
     def get(request: HttpRequest) -> HttpResponse:
-        state = request.GET['state']
+        state = request.GET.get('state', '')
         if state != 'none':
             return redirect('main:login')
 
-        code = request.GET['code']
+        code = request.GET.get('code', '')
         token = utils.fetch_token(code)
 
         if not isinstance(token, str):

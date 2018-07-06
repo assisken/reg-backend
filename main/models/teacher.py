@@ -1,5 +1,7 @@
 from django.db import models
 
+import json
+
 from .stud_group import StudGroup
 from .user import User
 

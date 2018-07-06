@@ -5,7 +5,7 @@ from django.views import View
 
 from main.forms import LinuxUser
 from main.models.user import User
-from main.utils.general import allowed_username, create_home, home_exists, username_exists
+from utils.general import allowed_username, create_home, home_exists, username_exists
 
 
 class MakeHome(View):

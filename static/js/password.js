@@ -47,4 +47,5 @@ $(function() {
             location.reload()
         }, 2000)
     });
+    Reset('#groupgen');
 });

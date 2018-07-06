@@ -26,7 +26,7 @@ class DbUserReset(UserRequired, View):
 
             resp['type'] = 'danger'
             resp['message'] = message
-            return HttpResponse(json.dumps(resp, ensure_ascii=False))
+            return HttpResponse(json.dumps(resp, ensure_ascii=False), content_type='application/json')
 
         password = form.cleaned_data.get('db_password')
         host = DB_CONFIG.get('client', 'host')
@@ -44,7 +44,7 @@ class DbUserReset(UserRequired, View):
         except Exception as e:
             resp['type'] = 'danger'
             resp['message'] = str(e)
-            return HttpResponse(json.dumps(resp, ensure_ascii=False))
+            return HttpResponse(json.dumps(resp, ensure_ascii=False), content_type='application/json')
         else:
             cur.close()
             con.close()
@@ -53,4 +53,4 @@ class DbUserReset(UserRequired, View):
         user.save()
         resp['type'] = 'success'
         resp['message'] = 'Новый пароль успешно установлен!'
-        return HttpResponse(json.dumps(resp, ensure_ascii=False))
+        return HttpResponse(json.dumps(resp, ensure_ascii=False), content_type='application/json')

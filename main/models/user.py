@@ -1,5 +1,6 @@
 from django.db import models
 
+from stauth.settings import CONFIG
 from .user_group import UserGroup
 
 
@@ -56,6 +57,13 @@ class User(models.Model):
             'E-mail': self.email,
             'Домен': '{name}.mati.su'.format(name=self.linux_user)
         }
+
+    def get_domain(self):
+        domain = CONFIG.get('core', 'domain')
+        if self.linux_user and domain:
+            return '{}.{}'.format(self.linux_user, domain)
+        else:
+            return None
 
     def is_teacher(self):
         return self.groups.get(name='Преподаватель')

@@ -6,7 +6,7 @@ import json
 from main.models.user import User
 from profile.forms import LinuxPassResetForm
 from profile.mixins import UserRequired
-from main.utils.general import reset_passwd
+from utils.general import reset_passwd
 
 
 class LinuxPassReset(UserRequired, View):
@@ -29,4 +29,4 @@ class LinuxPassReset(UserRequired, View):
         if not form.is_valid():
             resp['type'] = 'danger'
             resp['message'] = 'Форма невалидна. Что делать — ума не приложу.'
-        return HttpResponse(json.dumps(resp, ensure_ascii=False))
+        return HttpResponse(json.dumps(resp, ensure_ascii=False), content_type='application/json')

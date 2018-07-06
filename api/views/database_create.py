@@ -28,7 +28,7 @@ class DatabaseCreate(UserRequired, View):
 
             resp['type'] = 'danger'
             resp['message'] = message
-            return HttpResponse(json.dumps(resp, ensure_ascii=False))
+            return HttpResponse(json.dumps(resp, ensure_ascii=False), content_type='application/json')
 
         db_name = form.cleaned_data.get('name')
 
@@ -38,7 +38,7 @@ class DatabaseCreate(UserRequired, View):
         if db_count >= MAX_DB:
             resp['type'] = 'danger'
             resp['message'] = 'Вы не божете создать больше, чем {}!'.format(MAX_DB)
-            return HttpResponse(json.dumps(resp, ensure_ascii=False))
+            return HttpResponse(json.dumps(resp, ensure_ascii=False), content_type='application/json')
 
         try:
             host = DB_CONFIG.get('client', 'host')
@@ -53,7 +53,7 @@ class DatabaseCreate(UserRequired, View):
         except Exception as e:
             resp['type'] = 'danger'
             resp['message'] = str(e)
-            return HttpResponse(json.dumps(resp, ensure_ascii=False))
+            return HttpResponse(json.dumps(resp, ensure_ascii=False), content_type='application/json')
         else:
             cur.close()
             con.close()
@@ -64,9 +64,9 @@ class DatabaseCreate(UserRequired, View):
         except IntegrityError:
             resp['type'] = 'danger'
             resp['message'] = 'База данных с таким именем уже существует!'
-            return HttpResponse(json.dumps(resp, ensure_ascii=False))
+            return HttpResponse(json.dumps(resp, ensure_ascii=False), content_type='application/json')
 
         resp['type'] = 'success'
         resp['message'] = 'База данных успешно создана!'
 
-        return HttpResponse(json.dumps(resp, ensure_ascii=False))
+        return HttpResponse(json.dumps(resp, ensure_ascii=False), content_type='application/json')

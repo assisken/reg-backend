@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect
 from django.views import View
 
 from main.models.user import User
-from main.utils.general import fetch_user
+from utils.general import fetch_user
 from stauth.settings import DEBUG
 
 

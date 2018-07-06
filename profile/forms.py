@@ -63,3 +63,11 @@ class DbSelectMultipleForm(forms.Form):
         )
 
     select = forms.MultipleChoiceField(label='')
+
+
+class GenGroupByFileForm(forms.Form):
+    file = forms.FileField(
+        widget=forms.FileInput(attrs={'class': 'form-control'}),
+        label='Файл...',
+        required=True
+    )

@@ -1,7 +1,36 @@
 {% extends 'profile.html' %}
 
+{% load static %}
+
+{% block head %}
+    <script src="{% static 'js/password.js' %}"></script>
+{% endblock %}
+
 {% block profile_content %}
     <h4>Панель преподавателя</h4>
     <hr>
-    <p>Мои поздравления!</p>
+    <form id="groupgen" class="form-inline" action="{% url 'api:groupgen' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% for form in groupgen_form %}
+            <div class="form-group">
+                <label>{{ form.label }}</label>
+                {{ form }}
+            </div>
+        {% endfor %}
+        <input type="submit" value="Отправить" class="btn btn-primary">
+    </form>
+    <h5>Закреплённые группы:</h5>
+    <ul>
+    {% for group in teacher.groups.all %}
+        <li>{{ group.name }}</li>
+        <ol>
+        {% for user in group.users.all %}
+            <li>
+                {{ user.family_name }} {{ user.given_name }} {{ user.middle_name }}
+                {% if user.get_domain %}<a href="http://{{ user.get_domain }}" target="_blank">{{ user.get_domain }}</a>{% endif %}
+            </li>
+        {% endfor %}
+        </ol>
+    {% endfor %}
+    </ul>
 {% endblock %}
