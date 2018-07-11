@@ -5,7 +5,7 @@ from django.views import View
 from mysql import connector
 
 from profile.models import Database
-from stauth.settings import DB_CONFIG
+from stauth.settings import CONFIG
 
 
 class DatabaseRemove(View):
@@ -14,10 +14,10 @@ class DatabaseRemove(View):
         pname = request.POST['select']
 
         try:
-            host = DB_CONFIG.get('client', 'host')
+            host = CONFIG.get('database', 'host')
             con = connector.connect(
-                user=DB_CONFIG.get('client', 'user'),
-                password=DB_CONFIG.get('client', 'password'),
+                user=CONFIG.get('database', 'user'),
+                password=CONFIG.get('database', 'password'),
                 host=host,
             )
             cur = con.cursor()

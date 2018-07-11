@@ -6,7 +6,7 @@
     <p>
     Спасибо, что пользуетесь нашим приложением для своего сайта.<br>
     Ваш сайт доступен по адресу
-    <a href="http://{{ user.linux_user }}.mati.su" target="_blank">{{ user.linux_user }}.mati.su</a>.<br>
+    <a href="http://{{ user.linux_user }}.{{ domain }}" target="_blank">{{ user.linux_user }}.{{ domain }}</a>.<br>
     </p>
     <p>
     Пока на нём пусто, потому что он не настроен. Чтобы настроить его, следуйте следующей инструкции,
@@ -16,18 +16,19 @@
     <hr>
     <ol>
         <li>Откройте проводник.</li>
-        <li>В адресной строке введите следующий адрес:<br><code>ftp://{{ user.linux_user }}.mati.su</code></li>
+        <li>В адресной строке введите следующий адрес:<br><code>ftp://{{ user.linux_user }}.{{ domain }}</code></li>
         <li>Вводите свой логин и пароль</li>
-        <li>Перейдите в папку <code>www</code>, затем в папку <code>{{ user.linux_user }}.mati.su</code></li>
+        <li>Перейдите в папку <code>www</code>, затем в папку <code>{{ user.linux_user }}.{{ domain }}</code></li>
         <li>Вставляете файлы сайта</li>
     </ol>
     <p>После вышеуказанных действий сайт должен быть доступен.</p>
+    <br>
     <h5>Mac OS, Linux</h5>
     <hr>
     <div class="list-group list-group-item">
-<pre><code>ssh {{ user.linux_user }}@mati.su
-cd www/{{ user.linux_user }}.mati.su
-scp -r <i>путь_к_сайту</i> ssh://{{ user.linux_user }}@mati.su:/home/{{ user.linux_user }}/www/{{ user.linux_user }}.mati.su
+<pre><code>ssh {{ user.linux_user }}@{{ domain }}
+cd www/{{ user.linux_user }}.{{ domain }}
+scp -r <i>путь_к_сайту</i> ssh://{{ user.linux_user }}@{{ domain }}:/home/{{ user.linux_user }}/www/{{ user.linux_user }}.{{ domain }}
 </code></pre>
     </div>
     <code></code>

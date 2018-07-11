@@ -9,7 +9,7 @@ from main.models.user import User
 from profile.forms import DatabaseForm
 from profile.models import Database
 from profile.mixins import UserRequired
-from stauth.settings import DB_CONFIG, MAX_DB
+from stauth.settings import CONFIG, MAX_DB
 
 
 class DatabaseCreate(UserRequired, View):
@@ -41,10 +41,10 @@ class DatabaseCreate(UserRequired, View):
             return HttpResponse(json.dumps(resp, ensure_ascii=False), content_type='application/json')
 
         try:
-            host = DB_CONFIG.get('client', 'host')
+            host = CONFIG.get('database', 'host')
             con = connector.connect(
-                user=DB_CONFIG.get('client', 'user'),
-                password=DB_CONFIG.get('client', 'password'),
+                user=CONFIG.get('database', 'user'),
+                password=CONFIG.get('database', 'password'),
                 host=host,
             )
             cur = con.cursor()

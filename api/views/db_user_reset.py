@@ -7,7 +7,7 @@ from mysql import connector
 from main.models.user import User
 from profile.forms import DbPassResetForm
 from profile.mixins import UserRequired
-from stauth.settings import DB_CONFIG
+from stauth.settings import CONFIG
 
 
 class DbUserReset(UserRequired, View):
@@ -29,12 +29,12 @@ class DbUserReset(UserRequired, View):
             return HttpResponse(json.dumps(resp, ensure_ascii=False), content_type='application/json')
 
         password = form.cleaned_data.get('db_password')
-        host = DB_CONFIG.get('client', 'host')
+        host = CONFIG.get('database', 'host')
 
         try:
             con = connector.connect(
-                user=DB_CONFIG.get('client', 'user'),
-                password=DB_CONFIG.get('client', 'password'),
+                user=CONFIG.get('database', 'user'),
+                password=CONFIG.get('database', 'password'),
                 host=host,
             )
             cur = con.cursor()
