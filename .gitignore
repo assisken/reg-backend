@@ -8,6 +8,5 @@ __pycache__/
 log.txt
 uwsgi.ini
 secret.txt
-stauth/settings.py
 
 venv/
